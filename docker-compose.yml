@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+
+  # Vuls Agentless Vulnerability Scanner for Linux/FreeBSD
+  vuls:
+    image: vuls/vuls:latest
+    # command: ["scan", "-ssh-config", "-results-dir=/var/results"]
+    command: ["report", "-results-dir=/var/results", "-format-full-text", "-to-localfile"]
+    volumes:
+      - ./vuls:/vuls # Information required for scan
+      - ~/.ssh:/root/.ssh:ro # SSH key(s) and configuration for Remote Scan Mode
+      - logs:/var/log/vuls # Logging
+      - ./results:/var/results # Results from scan
+    networks:
+      - default
+    tty: true
+
+networks:
+  default:
+
+volumes:
+  logs: {}

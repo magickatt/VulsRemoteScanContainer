@@ -1,0 +1,9 @@
+[servers]
+
+[servers.remote]
+host        = "1.2.3.4"
+port        = "22"
+user        = "magickatt"
+keyPath     = "/root/.ssh/id_rsa"
+scanMode     = ["fast"]
+# type        = "pseudo"

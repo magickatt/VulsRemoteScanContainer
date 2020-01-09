@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+
+  # National Vulnerabilities Database (https://nvd.nist.gov)
+  # go-cve-dictionary:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./go-cve-dictionary
+  #   volumes:
+  #     - ./vuls:/vuls
+  #     - ./logs/go-cve-dictionary:/var/log/vuls
+  #   networks:
+  #     - default
+  #   tty: true
+
+  # Open Vulnerability and Assessment Language
+  goval:
+    image: vuls/goval-dictionary:latest
+    # command: ["fetch-debian", "7", "8", "9", "10"]
+    command: ["fetch-ubuntu", "14"]
+    volumes:
+      - ./vuls:/vuls
+      - logs:/var/log/vuls
+    networks:
+      - default
+    tty: true
+
+  # Security Tracker (https://securitytracker.com)
+  # gost:
+  #   image: vuls/gost:latest
+  #   command: ["fetch", "debian"]
+  #   volumes:
+  #     - ./vuls:/vuls
+  #     - ./logs/gost:/var/log/gost
+  #   networks:
+  #     - default
+  #   tty: true
+
+  # Exploit Database (https://www.exploit-db.com)
+  # exploitdb:
+  #   image: vuls/go-exploitdb:latest
+  #   command: ["fetch", "exploitdb"]
+  #   volumes:
+  #     - ./vuls:/vuls
+  #     - ./logs/go-exploitdb:/var/log/go-exploitdb
+  #   networks:
+  #     - default
+  #   tty: true
+
+networks:
+  default:
+
+volumes:
+  logs: {}
